@@ -1,0 +1,27 @@
+body
+{
+    background-image: linear-gradient(to bottom, #495371, #4d647e, #567588, #638591, #74959a);
+    color: white;
+    font-weight: 100;
+}
+.btn:hover{
+
+    color: white; 
+    background-color: #495371;
+    cursor: pointer;
+}
+@media screen and (min-width: 600px) {
+    .media{
+        width: 60%;
+    }
+    .media2{
+        width: 40%;
+    }
+}
+.btnDelete:hover{
+
+    color: white; 
+    background-color: #890F0D;
+    cursor: pointer;
+}
+
