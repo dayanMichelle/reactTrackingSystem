@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Error } from "./error"
 
 export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
-  
+
+
   const generarId = () => crypto.randomUUID()
 
   const [pedido, setPedido] = useState({
@@ -14,11 +15,27 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
     description: "",
     id: generarId()
   })
+
+  useEffect(() => {
+    if (Object.keys(pedidoEdit.length > 0)) {
+      //modifica el estado del pedido pero solo muestra name
+      // setPedido(pedidoEdit)
+    }
+  }, [pedidoEdit])
+
+
   const [error, setError] = useState(false)
+
   const hanldeSubmit = (e) => {
     e.preventDefault()
 
-    setPedido((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+
+    Array.from(e.currentTarget.elements).forEach(field => {
+      setPedido((prev) => ({ ...prev, [field.name]: field.value }))
+
+    });
+
+
     if (pedido.name == '' || pedido.address == '' || pedido.email == '' || pedido.number == '' || pedido.date == '' || pedido.description == '') {
       setError(true)
       return
@@ -26,14 +43,10 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
     setError(false)
     setPedidos([...pedidos, pedido])
 
-    setPedido({
-      name: "",
-      address: "",
-      email: "",
-      number: "",
-      date: "",
-      description: "",
-    })
+    Array.from(e.currentTarget.elements).forEach(field => {
+      setPedido(field.value = '')
+
+    });
 
 
   }

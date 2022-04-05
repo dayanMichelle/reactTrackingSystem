@@ -1,6 +1,9 @@
+import { useEffect } from "react"
 import { Pedido } from "./Pedido"
 
 export const ListadoPacientes = ({ pedidos, setPedidoEdit }) => {
+
+  
 
   return (
     <div style={{
