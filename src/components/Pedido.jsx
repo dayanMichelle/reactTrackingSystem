@@ -1,4 +1,4 @@
-export const Pedido = ({pedido,setPedidoEdit}) => {
+export const Pedido = ({pedido,edit}) => {
 
     return (
         <div style={{
@@ -91,7 +91,7 @@ export const Pedido = ({pedido,setPedidoEdit}) => {
                     borderRadius: '5px',
                     transition: 'all 0.3s ease',
                 }}
-                onClick={()=>{setPedidoEdit(pedido)}}
+                onClick={()=>{edit(pedido)}}
                 >Editar</button>
                 <button type="button"
                 className="btnDelete"

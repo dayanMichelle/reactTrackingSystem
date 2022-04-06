@@ -1,9 +1,8 @@
 import { useEffect } from "react"
 import { Pedido } from "./Pedido"
 
-export const ListadoPacientes = ({ pedidos, setPedidoEdit }) => {
+export const ListadoPacientes = ({ pedidos,edit }) => {
 
-  
 
   return (
     <div style={{
@@ -36,9 +35,9 @@ export const ListadoPacientes = ({ pedidos, setPedidoEdit }) => {
           </a>
           {pedidos.map((pedido) => (
             <Pedido
+            edit={edit}
               key={pedido.id}
               pedido={pedido}
-              setPedidoEdit={setPedidoEdit}
             />
           )
           )}

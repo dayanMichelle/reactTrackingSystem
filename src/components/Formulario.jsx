@@ -1,54 +1,27 @@
 import { useState, useEffect } from "react"
-import { Error } from "./error"
+import { useForm } from "react-hook-form"
+export const Formulario = ({ pedidos, setPedidos,currentUser }) => {
 
-export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
+  console.log(currentUser)
+  const { register, handleSubmit, watch, formState: { errors },setValue } = useForm({
+    defaultValues:currentUser
+  });
+  const [pedido, setPedido] = useState({})
+
+  setValue('name',currentUser.name)
+  setValue('adress',currentUser.adress)
+  setValue('email',currentUser.email)
+  setValue('number',currentUser.number)
+  setValue('date',currentUser.date)
+  setValue('description',currentUser.description)
 
 
   const generarId = () => crypto.randomUUID()
 
-  const [pedido, setPedido] = useState({
-    name: "",
-    address: "",
-    email: "",
-    number: "",
-    date: "",
-    description: "",
-    id: generarId()
-  })
 
-  useEffect(() => {
-    if (Object.keys(pedidoEdit.length > 0)) {
-      //modifica el estado del pedido pero solo muestra name
-      // setPedido(pedidoEdit)
-    }
-  }, [pedidoEdit])
-
-
-  const [error, setError] = useState(false)
-
-  const hanldeSubmit = (e) => {
-    e.preventDefault()
-
-
-    Array.from(e.currentTarget.elements).forEach(field => {
-      setPedido((prev) => ({ ...prev, [field.name]: field.value }))
-
-    });
-
-
-    if (pedido.name == '' || pedido.address == '' || pedido.email == '' || pedido.number == '' || pedido.date == '' || pedido.description == '') {
-      setError(true)
-      return
-    }
-    setError(false)
-    setPedidos([...pedidos, pedido])
-
-    Array.from(e.currentTarget.elements).forEach(field => {
-      setPedido(field.value = '')
-
-    });
-
-
+  const onSubmit = (data) => {
+    setPedido(data)
+    setPedidos([...pedidos,data])
   }
 
   return (
@@ -77,7 +50,7 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
           }}> Administralos</span>
       </a>
 
-      <form onSubmit={hanldeSubmit}
+      <form onSubmit={handleSubmit(onSubmit)}
         style={{
           marginBottom: '20px',
           backgroundColor: 'rgb(255, 255, 255, 0.2)',
@@ -88,8 +61,8 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
           borderRadius: '5px',
           marginTop: '20px',
         }}>
-        {error && <Error message='Todos los campos son obligatorios' />}
         <div style={{ marginBottom: '10px', }}>
+
           <label
             htmlFor="name"
             style={{
@@ -100,14 +73,14 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
             }} >Nombre destinatario:</label>
           <input
             id="name"
-            value={pedido.name}
-            onChange={(e) => setPedido({ ...pedido, name: e.target.value })}
             style={{
               width: '95%',
               padding: '10px',
               borderRadius: '5px',
               border: '1px solid #ccc',
-            }} type="text" placeholder="Nombre del destinatario" />
+            }} type="text" placeholder="Nombre del destinatario"
+             {...register("name")}
+             />
         </div>
 
         <div style={{ marginBottom: '10px', }}>
@@ -121,7 +94,7 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
             }} >Direccion:</label>
           <input
             id="address"
-            onChange={(e) => setPedido({ ...pedido, address: e.target.value })}
+            {...register("address")}
             style={{
               width: '95%',
               padding: '10px',
@@ -141,7 +114,8 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
             }} >Email:</label>
           <input
             id="email"
-            onChange={(e) => setPedido({ ...pedido, email: e.target.value })}
+            value="fwefw@d.cl"
+            {...register("email")}
             style={{
               border: '1px solid #ccc',
               borderRadius: '5px',
@@ -161,7 +135,7 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
             }} >Numero de telefono:</label>
           <input
             id="number"
-            onChange={(e) => setPedido({ ...pedido, number: e.target.value })}
+            {...register("number")}
             style={{
               border: '1px solid #ccc',
               borderRadius: '5px',
@@ -181,7 +155,7 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
             }} >Fecha de envio:</label>
           <input
             id="date"
-            onChange={(e) => setPedido({ ...pedido, date: e.target.value })}
+            {...register("date")}
             style={{
               border: '1px solid #ccc',
               borderRadius: '5px',
@@ -200,7 +174,7 @@ export const Formulario = ({ pedidos, setPedidos, pedidoEdit }) => {
               fontSize: '1.2em',
             }} >Descripcion:</label>
           <textarea
-            onChange={(e) => setPedido({ ...pedido, description: e.target.value })}
+             {...register("description")}
             style={{
               width: '95%',
               height: '100px',

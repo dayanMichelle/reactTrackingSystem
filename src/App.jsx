@@ -6,7 +6,25 @@ import { ListadoPacientes } from './components/ListadoPacientes'
 
 function App() {
   const [pedidos,setPedidos] = useState([])
-  const [pedidoEdit,setPedidoEdit] = useState([])
+  const [currentUser, setCurrentUser] = useState({
+    name: '',
+    adress: '',
+    email: '',
+    number:'',
+    date: '',
+    description:'',
+  })
+
+  const edit=(user) => {
+   setCurrentUser({
+    name: user.name,
+    adress: user.adress,
+    email: user.email,
+    number:user.number,
+    date: user.date,
+    description:user.description,
+   })
+  }
 
   return (
     <div
@@ -25,12 +43,11 @@ function App() {
         <Formulario
         pedidos={pedidos}
         setPedidos = {setPedidos}
-        pedidoEdit={pedidoEdit}
-        />
+        currentUser={currentUser}        />
        
         <ListadoPacientes 
         pedidos={pedidos}
-        setPedidoEdit={setPedidoEdit}
+        edit={edit}
          />
       </div>
     </div>
