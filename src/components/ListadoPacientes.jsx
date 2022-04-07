@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Pedido } from "./Pedido"
 
 export const ListadoPacientes = ({ pedidos,edit }) => {
-
+  console.log(pedidos)
 
   return (
     <div style={{

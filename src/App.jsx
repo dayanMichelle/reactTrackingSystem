@@ -6,7 +6,9 @@ import { ListadoPacientes } from './components/ListadoPacientes'
 
 function App() {
   const [pedidos,setPedidos] = useState([])
+  const [isEdit,setIsEdit] = useState(false)
   const [currentUser, setCurrentUser] = useState({
+    id: '',
     name: '',
     adress: '',
     email: '',
@@ -17,6 +19,7 @@ function App() {
 
   const edit=(user) => {
    setCurrentUser({
+     id: user.id,
     name: user.name,
     adress: user.adress,
     email: user.email,
@@ -24,6 +27,15 @@ function App() {
     date: user.date,
     description:user.description,
    })
+   setIsEdit(true)
+  }
+
+  const updateUser = (id,updatedUser) => {
+    setPedidos(pedidos.map(user=>{
+      (updatedUser.id === id ? updatedUser : user )
+    }))
+    console.log(user.id)
+    setIsEdit(false)
   }
 
   return (
@@ -43,11 +55,14 @@ function App() {
         <Formulario
         pedidos={pedidos}
         setPedidos = {setPedidos}
-        currentUser={currentUser}        />
+        currentUser={currentUser}  
+        updateUser={updateUser}  
+        isEdit={isEdit}  />
        
         <ListadoPacientes 
         pedidos={pedidos}
         edit={edit}
+        
          />
       </div>
     </div>

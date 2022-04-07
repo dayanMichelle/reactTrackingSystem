@@ -1,29 +1,51 @@
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
-export const Formulario = ({ pedidos, setPedidos,currentUser }) => {
+export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUser }) => {
 
-  console.log(currentUser)
-  const { register, handleSubmit, watch, formState: { errors },setValue } = useForm({
-    defaultValues:currentUser
+  const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm({
+    defaultValues: currentUser
   });
   const [pedido, setPedido] = useState({})
 
-  setValue('name',currentUser.name)
-  setValue('adress',currentUser.adress)
-  setValue('email',currentUser.email)
-  setValue('number',currentUser.number)
-  setValue('date',currentUser.date)
-  setValue('description',currentUser.description)
-
-
-  const generarId = () => crypto.randomUUID()
+  setValue('id', currentUser.id)
+  setValue('name', currentUser.name)
+  setValue('adress', currentUser.adress)
+  setValue('email', currentUser.email)
+  setValue('number', currentUser.number)
+  setValue('date', currentUser.date)
+  setValue('description', currentUser.description)
 
 
   const onSubmit = (data) => {
     setPedido(data)
-    setPedidos([...pedidos,data])
-  }
 
+    if (isEdit) {
+      console.log('acabas de editar')
+      setPedidos([
+        ...pedidos.filter(user => user.id !== data.id),
+        data
+      ])
+      setValue('id', '')
+      setValue('name', '')
+      setValue('adress', '')
+      setValue('email', '')
+      setValue('number', '')
+      setValue('date', '')
+      setValue('description', '')
+
+    } else {
+      setPedidos([...pedidos, data])
+    }
+
+    setValue('name', '')
+    setValue('adress', '')
+    setValue('email', '')
+    setValue('number', '')
+    setValue('date', '')
+    setValue('description', '')
+
+
+  }
   return (
     <div style={{
       textAlign: 'center',
@@ -62,7 +84,24 @@ export const Formulario = ({ pedidos, setPedidos,currentUser }) => {
           marginTop: '20px',
         }}>
         <div style={{ marginBottom: '10px', }}>
-
+          <label
+            htmlFor="name"
+            style={{
+              display: 'block',
+              textAlign: 'left',
+              marginBottom: '10px',
+              fontSize: '1.2em',
+            }} >Id:</label>
+          <input
+            id="id"
+            style={{
+              width: '95%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }} type="text" placeholder="Nombre del destinatario"
+            {...register("id")}
+          />
           <label
             htmlFor="name"
             style={{
@@ -79,13 +118,13 @@ export const Formulario = ({ pedidos, setPedidos,currentUser }) => {
               borderRadius: '5px',
               border: '1px solid #ccc',
             }} type="text" placeholder="Nombre del destinatario"
-             {...register("name")}
-             />
+            {...register("name")}
+          />
         </div>
 
         <div style={{ marginBottom: '10px', }}>
           <label
-            htmlFor="address"
+            htmlFor="adress"
             style={{
               display: 'block',
               textAlign: 'left',
@@ -174,7 +213,7 @@ export const Formulario = ({ pedidos, setPedidos,currentUser }) => {
               fontSize: '1.2em',
             }} >Descripcion:</label>
           <textarea
-             {...register("description")}
+            {...register("description")}
             style={{
               width: '95%',
               height: '100px',
@@ -182,7 +221,7 @@ export const Formulario = ({ pedidos, setPedidos,currentUser }) => {
               borderRadius: '5px',
             }} id="description" />
         </div>
-        <button
+        <input
           type="submit"
           className="btn"
           style={{
@@ -194,9 +233,8 @@ export const Formulario = ({ pedidos, setPedidos,currentUser }) => {
             borderRadius: '5px',
             transition: 'all 0.3s ease',
           }}
-          value="Agregar envio"
-        >Agregar envio
-        </button>
+          value={isEdit ? 'Editar' : 'Agregar'} />
+
 
       </form>
     </div>
