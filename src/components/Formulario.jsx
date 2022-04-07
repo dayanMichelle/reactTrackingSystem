@@ -100,7 +100,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
               marginBottom: '10px',
               border: '1px solid #ccc',
             }}type="text"  holder=""
-            {...register("id")}
+            {...register("id",{ required: "This is required." })}
           />
           <label
             htmlFor="name"
@@ -118,7 +118,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
               borderRadius: '5px',
               border: '1px solid #ccc',
             }} type="text"  holder="Nombre del destinatario"
-            {...register("name")}
+            {...register("name",{ required: "This is required." })}
           />
         </div>
 
@@ -133,7 +133,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
             }} >Address:</label>
           <input
             id="address"
-            {...register("address")}
+            {...register("address",{ required: "This is required." })}
             style={{
               width: '95%',
               padding: '10px',
@@ -153,7 +153,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
             }} >Email:</label>
           <input
             id="email"
-            {...register("email")}
+            {...register("email",{ required: "This is required." })}
             style={{
               border: '1px solid #ccc',
               borderRadius: '5px',
@@ -173,7 +173,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
             }} >Phone number:</label>
           <input
             id="number"
-            {...register("number")}
+            {...register("number",{ required: "This is required." })}
             style={{
               border: '1px solid #ccc',
               borderRadius: '5px',
@@ -193,7 +193,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
             }} >Shipping date:</label>
           <input
             id="date"
-            {...register("date")}
+            {...register("date",{ required: "This is required." })}
             style={{
               border: '1px solid #ccc',
               borderRadius: '5px',
@@ -212,7 +212,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
               fontSize: '1.2em',
             }} >Description:</label>
           <textarea
-            {...register("description")}
+            {...register("description",{ required: "This is required." })}
             style={{
               width: '95%',
               height: '100px',
