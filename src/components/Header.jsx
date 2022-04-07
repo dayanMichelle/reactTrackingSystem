@@ -22,7 +22,7 @@ export const Header = () => {
         textAlign:'center'
         }
     }
-      >Seguimiento de tus <span style={{color:'#BB8FCE'}}>P E D I D O S</span></h2>
+      >Track your <span style={{color:'#BB8FCE'}}>ORDERS</span></h2>
     </div>
     
   )

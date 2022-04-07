@@ -1,19 +1,26 @@
-export const Pedido = ({pedido,edit}) => {
+
+
+export const Pedido = ({ pedido, edit, deliteUser }) => {
+    const handledDelite = () => {
+        const respuesta = confirm('Deseas elimar este paciente');
+        respuesta && deliteUser(pedido.id)
+    }
 
     return (
         <div style={{
             backgroundColor: 'white',
             margin: '20px',
-            padding: '10px 5px',
+            padding: '10px 35px',
             borderRadius: '5px',
             color: 'black',
+            textAlign:'left',
+            fontSize: '1.2em',
         }}>
             <p
                 style={{
                     fontweight: 'bold',
-                    textTransform: 'uppercase',
 
-                }}>Nombre: {''}
+                }}>Name: {''}
                 <span style={{
                     fontweight: '100',
                     textTransform: 'Capitalize',
@@ -23,9 +30,8 @@ export const Pedido = ({pedido,edit}) => {
             <p
                 style={{
                     fontweight: 'bold',
-                    textTransform: 'uppercase',
 
-                }}>Direccion: {''}
+                }}>Address: {''}
                 <span style={{
                     fontweight: '100',
                     textTransform: 'Capitalize',
@@ -35,7 +41,6 @@ export const Pedido = ({pedido,edit}) => {
             <p
                 style={{
                     fontweight: 'bold',
-                    textTransform: 'uppercase',
 
                 }}>Email: {''}
                 <span style={{
@@ -47,7 +52,6 @@ export const Pedido = ({pedido,edit}) => {
             <p
                 style={{
                     fontweight: 'bold',
-                    textTransform: 'uppercase',
 
                 }}>N°: {''}
                 <span style={{
@@ -59,9 +63,8 @@ export const Pedido = ({pedido,edit}) => {
             <p
                 style={{
                     fontweight: 'bold',
-                    textTransform: 'uppercase',
 
-                }}>Fecha de envio: {''}
+                }}>Shipping date: {''}
                 <span style={{
                     fontweight: '100',
                     textTransform: 'Capitalize',
@@ -71,7 +74,6 @@ export const Pedido = ({pedido,edit}) => {
             <p
                 style={{
                     fontweight: 'bold',
-                    textTransform: 'uppercase',
 
                 }}>Description: {''}
                 <span style={{
@@ -79,31 +81,32 @@ export const Pedido = ({pedido,edit}) => {
                     textTransform: 'Capitalize',
                 }}>{pedido.description}</span>
             </p>
-            <div style={{display:'flex',gap:'30px'}}>
+            <div style={{ display: 'flex', gap: '30px' }}>
                 <button type="button"
-                className="btn"
-                style={{
-                    width: '100%',
-                    padding: '15px',
-                    textTransform: 'uppercase',
-                    fontWeight: 'bold',
-                    border: 'none',
-                    borderRadius: '5px',
-                    transition: 'all 0.3s ease',
-                }}
-                onClick={()=>{edit(pedido)}}
-                >Editar</button>
+                    className="btn"
+                    style={{
+                        width: '100%',
+                        padding: '15px',
+                        textTransform: 'uppercase',
+                        fontWeight: 'bold',
+                        border: 'none',
+                        borderRadius: '5px',
+                        transition: 'all 0.3s ease',
+                    }}
+                    onClick={() => { edit(pedido) }}
+                >Edit</button>
                 <button type="button"
-                className="btnDelete"
-                style={{
-                    width: '100%',
-                    padding: '15px',
-                    textTransform: 'uppercase',
-                    fontWeight: 'bold',
-                    border: 'none',
-                    borderRadius: '5px',
-                    transition: 'all 0.3s ease',
-                }}>Eliminar</button>
+                    className="btnDelete"
+                    onClick={handledDelite}
+                    style={{
+                        width: '100%',
+                        padding: '15px',
+                        textTransform: 'uppercase',
+                        fontWeight: 'bold',
+                        border: 'none',
+                        borderRadius: '5px',
+                        transition: 'all 0.3s ease',
+                    }}>Remove</button>
             </div>
 
         </div>

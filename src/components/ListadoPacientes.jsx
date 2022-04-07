@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { Pedido } from "./Pedido"
 
-export const ListadoPacientes = ({ pedidos,edit }) => {
+export const ListadoPacientes = ({ pedidos, edit, deliteUser }) => {
   console.log(pedidos)
 
   return (
@@ -19,25 +19,26 @@ export const ListadoPacientes = ({ pedidos,edit }) => {
               fontSize: '1.8em',
               textAlign: 'center',
             }}>
-            Listado de envios</p>
+            Shipping List</p>
           <a href=""
             style={{
               color: 'white',
               fontWeight: '300',
               textDecoration: 'none',
             }}>
-            Adminstra pedidos y
+            Manage orders and
             <span
               style={{
                 color: '#BB8FCE',
                 fontWeight: '100',
-              }}> Envios</span>
+              }}> Shipping</span>
           </a>
           {pedidos.map((pedido) => (
             <Pedido
-            edit={edit}
+              edit={edit}
               key={pedido.id}
               pedido={pedido}
+              deliteUser={deliteUser}
             />
           )
           )}

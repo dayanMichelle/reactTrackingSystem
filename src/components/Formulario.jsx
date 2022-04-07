@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
-export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUser }) => {
+export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
 
   const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm({
     defaultValues: currentUser
@@ -20,7 +20,6 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
     setPedido(data)
 
     if (isEdit) {
-      console.log('acabas de editar')
       setPedidos([
         ...pedidos.filter(user => user.id !== data.id),
         data
@@ -57,19 +56,19 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
           fontSize: '1.8em',
           textAlign: 'center',
         }}>
-        Seguimiento del paquete</p>
+        Package Tracking</p>
       <a href=""
         style={{
           color: 'white',
           fontWeight: '300',
           textDecoration: 'none',
         }}>
-        Añade Paquetes y
+        Add Packages and
         <span
           style={{
             color: '#BB8FCE',
             fontWeight: '100',
-          }}> Administralos</span>
+          }}> Manage them</span>
       </a>
 
       <form onSubmit={handleSubmit(onSubmit)}
@@ -98,8 +97,9 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               width: '95%',
               padding: '10px',
               borderRadius: '5px',
+              marginBottom: '10px',
               border: '1px solid #ccc',
-            }} type="text" placeholder="Nombre del destinatario"
+            }}type="text"  holder=""
             {...register("id")}
           />
           <label
@@ -109,7 +109,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               textAlign: 'left',
               marginBottom: '10px',
               fontSize: '1.2em',
-            }} >Nombre destinatario:</label>
+            }} >Recipient name:</label>
           <input
             id="name"
             style={{
@@ -117,7 +117,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               padding: '10px',
               borderRadius: '5px',
               border: '1px solid #ccc',
-            }} type="text" placeholder="Nombre del destinatario"
+            }} type="text"  holder="Nombre del destinatario"
             {...register("name")}
           />
         </div>
@@ -130,7 +130,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               textAlign: 'left',
               marginBottom: '10px',
               fontSize: '1.2em',
-            }} >Direccion:</label>
+            }} >Address:</label>
           <input
             id="address"
             {...register("address")}
@@ -139,7 +139,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               padding: '10px',
               border: '1px solid #ccc',
               borderRadius: '5px',
-            }} type="text" placeholder="Direccion de envio" />
+            }} type="text"  holder="Direccion de envio" />
         </div>
 
         <div style={{ marginBottom: '10px', }}>
@@ -153,14 +153,13 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
             }} >Email:</label>
           <input
             id="email"
-            value="fwefw@d.cl"
             {...register("email")}
             style={{
               border: '1px solid #ccc',
               borderRadius: '5px',
               width: '95%',
               padding: '10px',
-            }} type="email" placeholder="Email" />
+            }} type="email"  holder="Email" />
         </div>
 
         <div style={{ marginBottom: '10px', }}>
@@ -171,7 +170,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               textAlign: 'left',
               marginBottom: '10px',
               fontSize: '1.2em',
-            }} >Numero de telefono:</label>
+            }} >Phone number:</label>
           <input
             id="number"
             {...register("number")}
@@ -180,7 +179,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               borderRadius: '5px',
               width: '95%',
               padding: '10px',
-            }} type="text" placeholder="Numero" />
+            }} type="text"  holder="Numero" />
         </div>
 
         <div style={{ marginBottom: '10px', }}>
@@ -191,7 +190,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               textAlign: 'left',
               marginBottom: '10px',
               fontSize: '1.2em',
-            }} >Fecha de envio:</label>
+            }} >Shipping date:</label>
           <input
             id="date"
             {...register("date")}
@@ -200,7 +199,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               borderRadius: '5px',
               width: '95%',
               padding: '10px',
-            }} type="date" placeholder="Numero" />
+            }} type="date"  holder="Numero" />
         </div>
 
         <div style={{ marginBottom: '10px', }}>
@@ -211,7 +210,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
               textAlign: 'left',
               marginBottom: '10px',
               fontSize: '1.2em',
-            }} >Descripcion:</label>
+            }} >Description:</label>
           <textarea
             {...register("description")}
             style={{
@@ -233,7 +232,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit, updateUse
             borderRadius: '5px',
             transition: 'all 0.3s ease',
           }}
-          value={isEdit ? 'Editar' : 'Agregar'} />
+          value={isEdit ? 'Edit' : 'Add'} />
 
 
       </form>

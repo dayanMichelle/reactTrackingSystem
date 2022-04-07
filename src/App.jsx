@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Formulario } from './components/Formulario'
 import { Header } from './components/Header'
 import { ListadoPacientes } from './components/ListadoPacientes'
@@ -7,6 +7,21 @@ import { ListadoPacientes } from './components/ListadoPacientes'
 function App() {
   const [pedidos,setPedidos] = useState([])
   const [isEdit,setIsEdit] = useState(false)
+
+  //verificando si existe algo el LocalStorage
+  useEffect(() => {
+   const obtenerLS = () => {
+     const pedidosLS = JSON.parse(localStorage.getItem('pedidos')) ?? []
+     setPedidos(pedidosLS)
+   }
+  obtenerLS()
+  },[])
+
+  //LocalStorage
+  useEffect(() => {
+    localStorage.setItem('pedidos',JSON.stringify(pedidos))
+  },[pedidos])
+
   const [currentUser, setCurrentUser] = useState({
     id: '',
     name: '',
@@ -30,12 +45,9 @@ function App() {
    setIsEdit(true)
   }
 
-  const updateUser = (id,updatedUser) => {
-    setPedidos(pedidos.map(user=>{
-      (updatedUser.id === id ? updatedUser : user )
-    }))
-    console.log(user.id)
-    setIsEdit(false)
+  const deliteUser = id => {
+    const pedidosActualizados = pedidos.filter(user => user.id !== id);
+    setPedidos(pedidosActualizados)
   }
 
   return (
@@ -56,13 +68,12 @@ function App() {
         pedidos={pedidos}
         setPedidos = {setPedidos}
         currentUser={currentUser}  
-        updateUser={updateUser}  
         isEdit={isEdit}  />
        
         <ListadoPacientes 
         pedidos={pedidos}
         edit={edit}
-        
+        deliteUser={deliteUser}
          />
       </div>
     </div>
