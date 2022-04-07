@@ -5,8 +5,9 @@
 
 ## What's this?
 
-tracking es un proyecto creado con react para gestion de envios.
-Utilizar
- - estado de uso
- - Efecto de uso
- - Usar formulario
+
+Tracking is a project created with react for shipping management.
+Use
+ - state of use
+ - Usage effect
+ - Use form
