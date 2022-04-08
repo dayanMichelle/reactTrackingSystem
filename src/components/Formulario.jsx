@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
-export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
+export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit,setIsEdit }) => {
 
   const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm({
     defaultValues: currentUser
@@ -24,26 +24,14 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
         ...pedidos.filter(user => user.id !== data.id),
         data
       ])
-      setValue('id', '')
-      setValue('name', '')
-      setValue('adress', '')
-      setValue('email', '')
-      setValue('number', '')
-      setValue('date', '')
-      setValue('description', '')
+   
+      setIsEdit(false)
 
     } else {
       setPedidos([...pedidos, data])
+  
     }
-
-    setValue('name', '')
-    setValue('adress', '')
-    setValue('email', '')
-    setValue('number', '')
-    setValue('date', '')
-    setValue('description', '')
-
-
+  
   }
   return (
     <div style={{
@@ -132,7 +120,7 @@ export const Formulario = ({ pedidos, setPedidos, currentUser, isEdit }) => {
               fontSize: '1.2em',
             }} >Address:</label>
           <input
-            id="address"
+            id="adress"
             {...register("address",{ required: "This is required." })}
             style={{
               width: '95%',

@@ -68,7 +68,9 @@ function App() {
         pedidos={pedidos}
         setPedidos = {setPedidos}
         currentUser={currentUser}  
-        isEdit={isEdit}  />
+        isEdit={isEdit}
+        setIsEdit={setIsEdit
+        }  />
        
         <ListadoPacientes 
         pedidos={pedidos}
